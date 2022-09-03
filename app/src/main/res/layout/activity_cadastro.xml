@@ -22,10 +22,13 @@
 
     <EditText
         android:id="@+id/editTextTextPersonName2"
-        android:layout_width="wrap_content"
+        android:layout_width="0dp"
         android:layout_height="wrap_content"
+        android:layout_marginStart="32dp"
+        android:layout_marginEnd="32dp"
         android:layout_marginBottom="8dp"
         android:drawableLeft="@drawable/ic_email_cinza_24"
+        android:drawablePadding="5dp"
         android:ems="10"
         android:hint="Email"
         android:inputType="textPersonName|textEmailAddress"
@@ -36,10 +39,13 @@
 
     <EditText
         android:id="@+id/editTextTextPersonName"
-        android:layout_width="wrap_content"
+        android:layout_width="0dp"
         android:layout_height="wrap_content"
+        android:layout_marginStart="32dp"
+        android:layout_marginEnd="32dp"
         android:layout_marginBottom="8dp"
         android:drawableLeft="@drawable/ic_pessoa_cinza_24"
+        android:drawablePadding="5dp"
         android:ems="10"
         android:hint="Nome"
         android:inputType="textPersonName"
@@ -50,9 +56,12 @@
 
     <EditText
         android:id="@+id/editTextTextPersonName3"
-        android:layout_width="wrap_content"
+        android:layout_width="0dp"
         android:layout_height="wrap_content"
+        android:layout_marginStart="32dp"
+        android:layout_marginEnd="32dp"
         android:drawableLeft="@drawable/ic_cadeado_cinza_24"
+        android:drawablePadding="5dp"
         android:ems="10"
         android:hint="Senha"
         android:inputType="textPersonName|textPassword"
@@ -63,12 +72,13 @@
 
     <Button
         android:id="@+id/button2"
-        android:layout_width="wrap_content"
+        android:layout_width="0dp"
         android:layout_height="wrap_content"
-        android:layout_marginStart="143dp"
+        android:layout_marginStart="32dp"
         android:layout_marginTop="16dp"
-        android:layout_marginEnd="143dp"
+        android:layout_marginEnd="32dp"
         android:text="Cadastrar"
+        android:textColor="@color/white"
         app:layout_constraintBottom_toTopOf="@+id/textView11"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"

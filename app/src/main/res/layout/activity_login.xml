@@ -8,9 +8,12 @@
 
     <EditText
         android:id="@+id/editTextTextPersonName4"
-        android:layout_width="wrap_content"
+        android:layout_width="0dp"
         android:layout_height="wrap_content"
+        android:layout_marginStart="32dp"
+        android:layout_marginEnd="32dp"
         android:drawableLeft="@drawable/ic_cadeado_cinza_24"
+        android:drawablePadding="5dp"
         android:ems="10"
         android:hint="Senha"
         android:inputType="textPersonName|textPassword"
@@ -21,10 +24,13 @@
 
     <EditText
         android:id="@+id/editTextTextPersonName5"
-        android:layout_width="wrap_content"
+        android:layout_width="0dp"
         android:layout_height="wrap_content"
+        android:layout_marginStart="32dp"
+        android:layout_marginEnd="32dp"
         android:layout_marginBottom="8dp"
         android:drawableLeft="@drawable/ic_email_cinza_24"
+        android:drawablePadding="5dp"
         android:ems="10"
         android:hint="Email"
         android:inputType="textPersonName|textEmailAddress"
@@ -35,10 +41,13 @@
 
     <Button
         android:id="@+id/button3"
-        android:layout_width="wrap_content"
+        android:layout_width="0dp"
         android:layout_height="wrap_content"
+        android:layout_marginStart="32dp"
         android:layout_marginTop="16dp"
+        android:layout_marginEnd="32dp"
         android:text="Entrar"
+        android:textColor="@color/white"
         app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"
