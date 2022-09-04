@@ -1,4 +1,4 @@
-package com.gerardusrocha.organizzeclone;
+package com.gerardusrocha.organizzeclone.activity;
 
 import androidx.appcompat.app.AppCompatActivity;
 
@@ -6,6 +6,7 @@ import android.content.Intent;
 import android.os.Bundle;
 import android.view.View;
 
+import com.gerardusrocha.organizzeclone.R;
 import com.gerardusrocha.organizzeclone.activity.CadastroActivity;
 import com.gerardusrocha.organizzeclone.activity.LoginActivity;
 import com.heinrichreimersoftware.materialintro.app.IntroActivity;
