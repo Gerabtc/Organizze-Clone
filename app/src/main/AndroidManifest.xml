@@ -16,6 +16,14 @@
         android:theme="@style/Theme.OrganizzeClone"
         tools:targetApi="31">
         <activity
+            android:name=".activity.DespesasActivity"
+            android:theme="@style/despesasTheme."
+            android:exported="false" />
+        <activity
+            android:name=".activity.ReceitasActivity"
+            android:theme="@style/receitasTheme.."
+            android:exported="false" />
+        <activity
             android:name=".activity.PrincipalActivity"
             android:exported="true"
             android:label="@string/title_activity_principal"

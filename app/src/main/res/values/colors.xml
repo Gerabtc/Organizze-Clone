@@ -10,4 +10,10 @@
     <color name="blue">#01C7D2</color>
     <color name="blue_dark">#00b2bc</color>
     <color name="orange">#ff706a</color>
+    <color name="colorPrimaryDespesa">#FF706A</color>
+    <color name="colorPrimaryDarkDespesa">#E66560</color>
+    <color name="colorSecondaryDespesa">#FF706A</color>
+    <color name="colorPrimaryReceita">#00D39E</color>
+    <color name="colorPrimaryDarkReceita">#00BE8B</color>
+    <color name="colorSecondaryReceita">#00D39E</color>
 </resources>

@@ -1,5 +1,6 @@
 package com.gerardusrocha.organizzeclone.activity;
 
+import android.content.Intent;
 import android.os.Bundle;
 
 import com.gerardusrocha.organizzeclone.databinding.ActivityPrincipalBinding;
@@ -37,6 +38,14 @@ public class PrincipalActivity extends AppCompatActivity {
                         .setAction("Action", null).show();
             }
         });
+    }
+
+    public void adicionarDespesa(View view) {
+        startActivity(new Intent(this, DespesasActivity.class));
+    }
+
+    public void adicionarReceita(View view) {
+        startActivity(new Intent(this, ReceitasActivity.class));
     }
 
 

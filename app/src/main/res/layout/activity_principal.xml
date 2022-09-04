@@ -1,6 +1,7 @@
 <?xml version="1.0" encoding="utf-8"?>
 <androidx.coordinatorlayout.widget.CoordinatorLayout xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:fab="http://schemas.android.com/apk/res-auto"
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
@@ -20,14 +21,38 @@
 
     </com.google.android.material.appbar.AppBarLayout>
 
+    <include layout="@layout/content_principal" />
 
-    <com.google.android.material.floatingactionbutton.FloatingActionButton
+    <com.github.clans.fab.FloatingActionMenu
         android:id="@+id/fab"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:layout_gravity="bottom|end"
-        android:layout_marginEnd="@dimen/fab_margin"
-        android:layout_marginBottom="16dp"
-        app:srcCompat="@android:drawable/ic_dialog_email" />
+        android:layout_gravity="end|bottom"
+        android:layout_margin="10dp"
+        fab:menu_icon="@drawable/ic_adicionar_branco_24"
+        app:menu_colorNormal="@color/orange"
+        app:menu_colorPressed="@color/orange" >
+
+        <com.github.clans.fab.FloatingActionButton
+            android:id="@+id/menu_despesa"
+            android:onClick="adicionarDespesa"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:src="@drawable/ic_adicionar_branco_24"
+            fab:fab_colorNormal="@color/colorPrimaryDespesa"
+            fab:fab_label="Despesa"
+            fab:fab_size="mini"/>
+
+        <com.github.clans.fab.FloatingActionButton
+            android:id="@+id/menu_receita"
+            android:onClick="adicionarReceita"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:src="@drawable/ic_adicionar_branco_24"
+            fab:fab_colorNormal="@color/colorPrimaryReceita"
+            fab:fab_label="Receita"
+            fab:fab_size="mini"/>
+
+    </com.github.clans.fab.FloatingActionMenu>
 
 </androidx.coordinatorlayout.widget.CoordinatorLayout>
