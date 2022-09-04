@@ -3,6 +3,7 @@ package com.gerardusrocha.organizzeclone.activity;
 import androidx.annotation.NonNull;
 import androidx.appcompat.app.AppCompatActivity;
 
+import android.content.Intent;
 import android.os.Bundle;
 import android.view.View;
 import android.widget.Button;
@@ -78,9 +79,9 @@ public class LoginActivity extends AppCompatActivity {
             public void onComplete(@NonNull Task<AuthResult> task) {
 
                 if (task.isSuccessful()) {
-                    Toast.makeText(LoginActivity.this,
-                            "Sucesso ao fazer login",
-                            Toast.LENGTH_SHORT).show();
+
+                    abrirTelaPrincipal();
+
                 } else {
 
                     String excecao = "";
@@ -101,5 +102,10 @@ public class LoginActivity extends AppCompatActivity {
                 }
             }
         });
+    }
+
+    public void abrirTelaPrincipal() {
+        startActivity(new Intent(this, PrincipalActivity.class));
+        finish();
     }
 }
