@@ -6,9 +6,12 @@ import android.os.Bundle;
 import com.gerardusrocha.organizzeclone.databinding.ActivityPrincipalBinding;
 import com.google.android.material.snackbar.Snackbar;
 
+import androidx.annotation.NonNull;
 import androidx.appcompat.app.AppCompatActivity;
 
 import android.view.View;
+import android.widget.CalendarView;
+import android.widget.TextView;
 
 import androidx.navigation.NavController;
 import androidx.navigation.Navigation;
@@ -21,6 +24,9 @@ public class PrincipalActivity extends AppCompatActivity {
 
     private AppBarConfiguration appBarConfiguration;
     private ActivityPrincipalBinding binding;
+    private CalendarView calendarView;
+    private TextView textSaudacao, textSaldo;
+
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -30,6 +36,18 @@ public class PrincipalActivity extends AppCompatActivity {
         setContentView(binding.getRoot());
 
         setSupportActionBar(binding.toolbar);
+
+        textSaudacao = findViewById(R.id.textSaudacao);
+        textSaldo = findViewById(R.id.textSaldo);
+
+        calendarView = findViewById(R.id.calendarView);
+
+        calendarView.setOnDateChangeListener(new CalendarView.OnDateChangeListener() {
+            @Override
+            public void onSelectedDayChange(@NonNull CalendarView calendarView, int ano, int mes, int dia) {
+
+            }
+        });
 
         binding.fab.setOnClickListener(new View.OnClickListener() {
             @Override
