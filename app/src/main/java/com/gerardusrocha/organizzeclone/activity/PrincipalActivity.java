@@ -5,11 +5,14 @@ import android.os.Bundle;
 
 import com.gerardusrocha.organizzeclone.config.ConfiguracaoFirebase;
 import com.gerardusrocha.organizzeclone.databinding.ActivityPrincipalBinding;
+import com.gerardusrocha.organizzeclone.helper.Base64Custom;
+import com.gerardusrocha.organizzeclone.model.Usuario;
 import com.google.android.material.snackbar.Snackbar;
 
 import androidx.annotation.NonNull;
 import androidx.appcompat.app.AppCompatActivity;
 
+import android.util.Log;
 import android.view.Menu;
 import android.view.MenuItem;
 import android.view.View;
@@ -23,6 +26,12 @@ import androidx.navigation.ui.NavigationUI;
 
 import com.gerardusrocha.organizzeclone.R;
 import com.google.firebase.auth.FirebaseAuth;
+import com.google.firebase.database.DataSnapshot;
+import com.google.firebase.database.DatabaseError;
+import com.google.firebase.database.DatabaseReference;
+import com.google.firebase.database.ValueEventListener;
+
+import java.text.DecimalFormat;
 
 public class PrincipalActivity extends AppCompatActivity {
 
@@ -30,7 +39,15 @@ public class PrincipalActivity extends AppCompatActivity {
     private ActivityPrincipalBinding binding;
     private CalendarView calendarView;
     private TextView textSaudacao, textSaldo;
-    private FirebaseAuth autenticacao;
+    private Double despesaTotal = 0.0;
+    private Double receitaTotal = 0.0;
+    private Double resumoUsuario = 0.0;
+
+
+    private FirebaseAuth autenticacao = ConfiguracaoFirebase.getAutenticacao();
+    private DatabaseReference firebaseRef = ConfiguracaoFirebase.getFirebaseDatabase();
+    private DatabaseReference usuarioRef;
+    private ValueEventListener valueEventListenerUsuario;
 
 
     @Override
@@ -44,7 +61,6 @@ public class PrincipalActivity extends AppCompatActivity {
 
         textSaudacao = findViewById(R.id.textSaudacao);
         textSaldo = findViewById(R.id.textSaldo);
-
         calendarView = findViewById(R.id.calendarView);
 
         calendarView.setOnDateChangeListener(new CalendarView.OnDateChangeListener() {
@@ -54,11 +70,42 @@ public class PrincipalActivity extends AppCompatActivity {
             }
         });
 
-        binding.fab.setOnClickListener(new View.OnClickListener() {
+    }
+
+    @Override
+    protected void onStart() {
+        super.onStart();
+        recuperarResumo();
+
+    }
+
+    public void recuperarResumo() {
+
+        String emailUsuario = autenticacao.getCurrentUser().getEmail();
+        String idUsuario = Base64Custom.codificarBase64(emailUsuario);
+        usuarioRef = firebaseRef.child("usuarios").child(idUsuario);
+
+        valueEventListenerUsuario = usuarioRef.addValueEventListener(new ValueEventListener() {
             @Override
-            public void onClick(View view) {
-                Snackbar.make(view, "Replace with your own action", Snackbar.LENGTH_LONG)
-                        .setAction("Action", null).show();
+            public void onDataChange(@NonNull DataSnapshot snapshot) {
+
+                Usuario usuario = snapshot.getValue(Usuario.class);
+
+                despesaTotal = usuario.getDespesaTotal();
+                receitaTotal = usuario.getReceitaTotal();
+                resumoUsuario = receitaTotal - despesaTotal;
+
+                DecimalFormat decimalFormat = new DecimalFormat("0.##");
+                String resultadoFormatado = decimalFormat.format(resumoUsuario);
+
+                textSaudacao.setText("Olá, " + usuario.getNome());
+                textSaldo.setText("R$ " + resultadoFormatado);
+
+            }
+
+            @Override
+            public void onCancelled(@NonNull DatabaseError error) {
+
             }
         });
     }
@@ -73,7 +120,6 @@ public class PrincipalActivity extends AppCompatActivity {
     public boolean onOptionsItemSelected(@NonNull MenuItem item) {
         switch (item.getItemId()) {
             case R.id.menuSair:
-                autenticacao = ConfiguracaoFirebase.getAutenticacao();
                 autenticacao.signOut();
                 startActivity(new Intent(this, MainActivity.class));
                 finish();
@@ -90,5 +136,9 @@ public class PrincipalActivity extends AppCompatActivity {
         startActivity(new Intent(this, ReceitasActivity.class));
     }
 
-
+    @Override
+    protected void onStop() {
+        super.onStop();
+        usuarioRef.removeEventListener(valueEventListenerUsuario);
+    }
 }
