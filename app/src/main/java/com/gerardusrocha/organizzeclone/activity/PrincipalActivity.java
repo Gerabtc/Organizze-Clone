@@ -3,26 +3,25 @@ package com.gerardusrocha.organizzeclone.activity;
 import android.content.Intent;
 import android.os.Bundle;
 
+import com.gerardusrocha.organizzeclone.adapter.AdapterMovimentacao;
 import com.gerardusrocha.organizzeclone.config.ConfiguracaoFirebase;
 import com.gerardusrocha.organizzeclone.databinding.ActivityPrincipalBinding;
 import com.gerardusrocha.organizzeclone.helper.Base64Custom;
+import com.gerardusrocha.organizzeclone.model.Movimentacao;
 import com.gerardusrocha.organizzeclone.model.Usuario;
-import com.google.android.material.snackbar.Snackbar;
 
 import androidx.annotation.NonNull;
 import androidx.appcompat.app.AppCompatActivity;
 
-import android.util.Log;
 import android.view.Menu;
 import android.view.MenuItem;
 import android.view.View;
 import android.widget.CalendarView;
 import android.widget.TextView;
 
-import androidx.navigation.NavController;
-import androidx.navigation.Navigation;
 import androidx.navigation.ui.AppBarConfiguration;
-import androidx.navigation.ui.NavigationUI;
+import androidx.recyclerview.widget.LinearLayoutManager;
+import androidx.recyclerview.widget.RecyclerView;
 
 import com.gerardusrocha.organizzeclone.R;
 import com.google.firebase.auth.FirebaseAuth;
@@ -32,6 +31,8 @@ import com.google.firebase.database.DatabaseReference;
 import com.google.firebase.database.ValueEventListener;
 
 import java.text.DecimalFormat;
+import java.util.ArrayList;
+import java.util.List;
 
 public class PrincipalActivity extends AppCompatActivity {
 
@@ -49,6 +50,9 @@ public class PrincipalActivity extends AppCompatActivity {
     private DatabaseReference usuarioRef;
     private ValueEventListener valueEventListenerUsuario;
 
+    private RecyclerView recyclerView;
+    private AdapterMovimentacao adapterMovimentacao;
+    private List<Movimentacao> movimentacoes = new ArrayList<>();
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -62,7 +66,15 @@ public class PrincipalActivity extends AppCompatActivity {
         textSaudacao = findViewById(R.id.textSaudacao);
         textSaldo = findViewById(R.id.textSaldo);
         calendarView = findViewById(R.id.calendarView);
+        recyclerView = findViewById(R.id.recyclerMovimentos);
 
+        adapterMovimentacao = new AdapterMovimentacao(movimentacoes, this);
+
+        RecyclerView.LayoutManager layoutManager = new LinearLayoutManager(getApplicationContext());
+        recyclerView.setLayoutManager(layoutManager);
+        recyclerView.setHasFixedSize(true);
+        recyclerView.setAdapter(adapterMovimentacao);
+        
         calendarView.setOnDateChangeListener(new CalendarView.OnDateChangeListener() {
             @Override
             public void onSelectedDayChange(@NonNull CalendarView calendarView, int ano, int mes, int dia) {

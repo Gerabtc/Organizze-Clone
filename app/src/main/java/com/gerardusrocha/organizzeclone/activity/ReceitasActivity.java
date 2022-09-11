@@ -29,6 +29,7 @@ public class ReceitasActivity extends AppCompatActivity {
     private DatabaseReference firebaseRef = ConfiguracaoFirebase.getFirebaseDatabase();
     private FirebaseAuth autenticacao = ConfiguracaoFirebase.getAutenticacao();
     private Double receitaTotal;
+    private Double receitaAtualizada = 0.0;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -59,7 +60,7 @@ public class ReceitasActivity extends AppCompatActivity {
             movimentacao.setData(data);
             movimentacao.setTipo("r");
 
-            Double receitaAtualizada = receitaTotal + valorRecuperado;
+            receitaAtualizada = receitaTotal + valorRecuperado;
             atualizarReceita(receitaAtualizada);
 
             movimentacao.salvar(data);
